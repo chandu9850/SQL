@@ -99,7 +99,68 @@ select * from players where salary>1000000;
 select * from players where role_type='bowler' and team_name='srh';
 -- 5)find players who scored more than 3000 runs
 select * from players where runs_scored>3000;
--- find players whose wickets are greater than 100 
+-- 6)find players whose wickets are greater than 100 
 -- but i want only column player_id,player_name,location,
 -- age,wickets,team_name  
 select  player_id,player_name,location,age,wickets,team_name from players where wickets>100;
+
+  -- like operator (%condition%) and 
+  
+-- find players whose players_names start with r
+select * from players where player_name like "r%";
+
+-- find players whose players_names end with alter
+select * from players where player_name like "%a";
+
+-- find players whose name contains %sharma%
+select * from players where player_name like "%sharma%";
+
+-- find players whose location end with i
+select * from players where location like "%i";
+
+-- find players whose name start with r and end with h
+select * from players where player_name like "r%h";
+
+-- find players whose names contain "a and belong to mi team
+select * from players where player_name like '%a%'  and team_name like "mi";
+
+-- find players whose location start with h and roll_type is bowler
+select * from players where location like "h%"  and role_type like "bowler";
+
+select * from players where team_name like "m%i";
+select * from players where 
+
+-- underscore operator (_)
+
+-- find players whose names have exactly 5 characters
+-- Underscore operator (_)
+
+
+-- Find players whose names have exactly 5 characters
+select * from players where player_name like '_____';
+
+-- find players whose location have exactly 5 characters
+select * from players where location like '_____';
+
+-- find players whose location have 6 charecters and age is greater than 30
+select * from players where age>30 and location like '______';
+
+select * from players where age>30 and location like '_e%';
+
+
+-- order by question 
+
+-- display all players sorted by salary
+select * from players order by salary desc;
+
+-- find top three 
+select * from players order by age asc limit 3;
+
+-- find top 10 runs_scored
+select * from players order by runs_scored desc limit 10;
+
+-- find top 5 heighest paid players 
+select * from players order by salary desc limit 5;
+
+-- 
+select * from 
