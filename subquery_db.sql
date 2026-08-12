@@ -85,5 +85,20 @@ where salary = (select max(salary)  from employees);
 
 
 -- 3) Find employees working in departments that have projects.
+SELECT DISTINCT e.emp_name, p.dept_id
+FROM employees e
+INNER JOIN projects p
+ON e.dept_id = p.dept_id;
+
 -- 4) Find employees whose department has no project.
+SELECT emp_name,dept_id
+FROM employees
+where dept_id not in (select dept_id from departments);
+
+select * from projects;
+select * from departments;
+
 -- 5) Find employees working on projects whose budget is greater than ₹3,00,000.
+select emp_name, gender from employees
+where emp_id in(select emp_id from employee_project
+where project_id in (select project_id from projects where budget>300000));
