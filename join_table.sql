@@ -98,12 +98,12 @@ on customers.customer_id=orders.customer_id;
 
 -- display all orders along with customer details
 SELECT 
-    orders.order_id,
-    orders.order_date,
+    order_id,
+    order_date,
     product_name,
-    customers.customer_id,
-    customers.customer_name,
-    customers.city
+    customer_id,
+    customer_name,
+    city
 FROM orders
 right JOIN customers
 ON orders.customer_id = customers.customer_id;
@@ -123,5 +123,9 @@ LEFT JOIN orders o
 ON c.customer_id = o.customer_id;
 
 
-
+SELECT customers.*
+FROM customers
+LEFT JOIN orders
+ON customers.customer_id = orders.customer_id
+WHERE orders.customer_id IS NULL;
 
