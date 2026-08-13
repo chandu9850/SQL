@@ -102,3 +102,5 @@ select * from departments;
 select emp_name, gender from employees
 where emp_id in(select emp_id from employee_project
 where project_id in (select project_id from projects where budget>300000));
+
+
