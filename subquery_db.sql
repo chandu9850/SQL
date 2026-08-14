@@ -96,11 +96,38 @@ FROM employees
 where dept_id not in (select dept_id from departments);
 
 select * from projects;
+select * from employee_project;
+select * from employees;
 select * from departments;
 
 -- 5) Find employees working on projects whose budget is greater than ₹3,00,000.
 select emp_name, gender from employees
 where emp_id in(select emp_id from employee_project
 where project_id in (select project_id from projects where budget>300000));
+
+-- Find the project name and budget and department id of all projects assigned to female employees who live in Pune.
+select project_name, budget, dept_id  from projects
+where project_id in (select project_id from employee_project
+where  emp_id in (select emp_id from employees where gender='f'and city='pune' and salary=80000
+and dept_id in (select dept_id from departments where dept_id=40)));
+
+-- same quetion using join 
+
+-- Find the project name and budget of all projects assigned to female employees who live in Pune.
+select p.project_name, p.budget
+from projects p join employee_project ep 
+on p.project_id=ep.project_id
+join employees e on e.emp_id=ep.emp_id 
+where e.gender='f' and e.city='pune';
+
+-- Find the project name, project budget, and department ID of projects assigned to female employees from Pune who have a salary of 80,000.
+select p.project_name, p.budget, d.dept_id
+from projects p join employee_project ep 
+on p.project_id=ep.project_id
+join employees e on e.emp_id=ep.emp_id 
+join departments d on d.dept_id=e.dept_id
+where e.gender='f' and e.city='pune' and salary=80000;
+
+
 
 
