@@ -85,7 +85,7 @@ where salary = (select max(salary)  from employees);
 
 
 -- 3) Find employees working in departments that have projects.
-SELECT DISTINCT e.emp_name, p.dept_id
+SELECT DISTINCT e.emp_name, p.dept_id, p.project_name
 FROM employees e
 INNER JOIN projects p
 ON e.dept_id = p.dept_id;

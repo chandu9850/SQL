@@ -71,6 +71,7 @@ INSERT INTO orders_3 VALUES
 
 
 select * from customers_2;
+select * from orders_3;
 
 -- display customer name and membership category
 select customer_name, membership_type, 
@@ -78,7 +79,7 @@ case
 when membership_type='platinum' then "VIP Customer"
 when membership_type='gold' then "premium Customer"
 else "regular customer"
-end
+end 
 from customers_2;
 
 -- classify 
@@ -100,7 +101,26 @@ select product_name, amount,
 case
 when amount>50000 then "10% discount"
 when amount>20000 then "5% discount"
-else "no discount"
+else "No discount"
 end as discount_table
 from orders_3;
+
+
+
+
+-- Q1. Customer Order Details with Membership Category
+select 
+c.customer_name, 
+c.city, 
+o.product_name, 
+o.amount,
+case
+when c.membership_type='platinum' then 'vip'
+when c.membership_type='gold' then 'premium'
+when c.membership_type='silver' then 'regular'
+else 'others'
+end as membership_type 
+from customers_2 c 
+inner join orders_3 o 
+on c.customer_id=o.customer_id;
 

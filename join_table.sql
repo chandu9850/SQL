@@ -97,15 +97,15 @@ select customer_name, order_date from customers inner join orders
 on customers.customer_id=orders.customer_id;
 
 -- display all orders along with customer details
-SELECT 
-    order_id,
-    order_date,
-    product_name,
-    customer_id,
-    customer_name,
-    city
+SELECT
+    orders.order_id,
+    orders.order_date,
+    orders.product_name,
+    orders.customer_id,
+    customers.customer_name,
+    customers.city
 FROM orders
-right JOIN customers
+RIGHT JOIN customers
 ON orders.customer_id = customers.customer_id;
 
 -- find customer who have not any order
