@@ -124,3 +124,11 @@ from customers_2 c
 inner join orders_3 o 
 on c.customer_id=o.customer_id;
 
+
+
+
+
+
+
+
+

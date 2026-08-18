@@ -52,9 +52,49 @@ select employee_name, salary from employees
 where employee_name="amit";
 
 select employee_name, salary
-from employees where salary=60000.00;
+from employees
+order by salary desc;
 
-select employee_name, salary
+select employee_name
 from employees where salary>
 (select salary from employees
 where employee_name="amit");
+
+-- find employees whos salary is less than all it employees
+select employee_name, salary
+from employees where salary < all
+(select salary from employees
+where department="it");
+
+-- find employees whos joined after vikas
+select employee_name, joining_year
+from employees where joining_year >
+(select joining_year from employees
+where employee_name="vikas" );
+
+-- find departments that have more than three employees
+select department, count(*)
+from employees
+group by department
+having count(*)>3;
+
+-- display the highest salary in each city
+select city, max(salary)
+from employees 
+group by city;
+
+-- least it employees from pune who have more than 5 years of experience
+select employee_name, experience_years
+from employees
+where department="it" and city="pune" and  experience_years>5;
+
+select * from employees;
+
+-- find employees whos age is greater than there experience year + 20
+select employee_name, age, experience_years
+from employees
+where age>"experience_years + 20" ; 
+
+select * from employees;
+
+-- 

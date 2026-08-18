@@ -128,7 +128,7 @@ select * from players where player_name like '%a%'  and team_name like "mi";
 select * from players where location like "h%"  and role_type like "bowler";
 
 select * from players where team_name like "m%i";
-select * from players where 
+
 
 -- underscore operator (_)
 
@@ -163,4 +163,3 @@ select * from players order by runs_scored desc limit 10;
 select * from players order by salary desc limit 5;
 
 -- 
-select * from 
