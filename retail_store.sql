@@ -92,6 +92,15 @@ end
 from customers_2;
 
 --  classify products on their order_amount if amt=>50,000 expensive, 10,000 
+SELECT
+    product_name,
+    amount,
+    CASE
+        WHEN amount >= 50000 THEN 'Expensive'
+        WHEN amount >= 10000 THEN 'Moderate'
+        ELSE 'Affordable'
+    END AS price_category
+FROM orders_3;
 
 -- show products base on discount category use amount as a refrence column 
 -- amt<50,000 then use 10% discount

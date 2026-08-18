@@ -97,4 +97,3 @@ where age>"experience_years + 20" ;
 
 select * from employees;
 
--- 

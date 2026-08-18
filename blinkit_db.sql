@@ -141,9 +141,70 @@ from blinkit_orders;
 -- rank orders within each category base on order amount
 select category, order_amount, order_date,product_name,
 rank() 
-over (partition by  order_amount)
+over (partition by category
+order by order_amount desc)
 as rows_number
 from blinkit_orders;
+
+-- Find the top 2 highest-value orders in each category.
+
+
+    SELECT
+        order_id,
+        category,
+        product_name,
+        order_amount,
+        ROW_NUMBER() OVER (
+            PARTITION BY category
+            ORDER BY order_amount DESC
+        ) AS rn
+    FROM blinkit_orders
+WHERE rn <= 2;
+
+-- Assign a unique row number to orders within each category based on highest order amount.
+
+
+-- Compare RANK(), DENSE_RANK() and ROW_NUMBER() using your data.
+SELECT
+    category,
+    customer_name,
+    order_amount,
+
+    ROW_NUMBER() OVER (
+        PARTITION BY category
+        ORDER BY order_amount DESC
+    ) AS roww_number,
+
+    RANK() OVER (
+        PARTITION BY category
+        ORDER BY order_amount DESC
+    ) AS rank_number,
+
+    DENSE_RANK() OVER (
+        PARTITION BY category
+        ORDER BY order_amount DESC
+    ) AS dense_rank_number
+
+FROM blinkit_orders
+ORDER BY category, order_amount DESC;
+
+-- Find the highest order in each category using a window function.
+
+
+-- Find the second-highest order in each category.
+-- Calculate the running total of order amount by order date.
+SELECT
+    order_id,
+    order_date,
+    customer_name,
+    order_amount,
+    SUM(order_amount) OVER (
+        ORDER BY order_date, order_id
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS running_total
+FROM blinkit_orders
+ORDER BY order_date, order_id;
+
 
  
  
