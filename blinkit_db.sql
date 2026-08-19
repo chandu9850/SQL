@@ -192,6 +192,8 @@ ORDER BY category, order_amount DESC;
 
 
 -- Find the second-highest order in each category.
+
+
 -- Calculate the running total of order amount by order date.
 SELECT
     order_id,

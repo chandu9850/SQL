@@ -17,3 +17,5 @@ modify name varchar(20);
 insert into chandu values ('ritesh',100000),
 						  ('chandu',20000);
                           select * from chandu;
+						
+
