@@ -292,7 +292,7 @@ FROM employees e
 JOIN departments d
 ON e.department_id = d.department_id
 GROUP BY d.department_name
-HAVING AVG(e.salary) > 1000000;
+HAVING AVG(e.salary) > 1000000; 
 
 -- LEVEL 8 — CASE WHEN
 -- Let's classify employees based on salary.
@@ -321,4 +321,7 @@ ELSE 0
 END
 ) / COUNT(*),2 ) AS attrition_rate
 FROM employees;
+
+
+
 
