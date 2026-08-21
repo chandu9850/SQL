@@ -17,14 +17,14 @@ select max(salary) as total_max from salaries;
 select min(salary) as min from salaries;
 
 -- (AGGREGATE) Calculate total salary paid.
-select sum(salary) as total_salary from salaries;
+select  sum(salary) as total_salary from salaries;
 
 -- (AGGREGATE) Count employees in each department.
 
 
 
 -- (AGGREGATE) Find average salary per employee.
-dept_manager
+
 
 
 (AGGREGATE) Find highest salary per employee.
@@ -45,3 +45,7 @@ dept_manager
 (AGGREGATE) Find avg salary by gender.
 (AGGREGATE) Find departments with lowest avg salary.
 🔵
+
+
+
+select 

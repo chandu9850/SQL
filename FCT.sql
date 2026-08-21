@@ -13,7 +13,7 @@ SET course = 'Data Sciencist'
 WHERE id = 2;
 select * from placement;
 
-alter table placement modify package varchar(20);
+alter table placement modify package varchar (20);
 SELECT *
 FROM placement
 WHERE package = '5 LPA';

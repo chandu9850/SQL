@@ -130,6 +130,7 @@ VALUES
  select order_id,customer_name,
  
  -- rank orders within each category based on order amount 
+ 
  select order_id,customer_name,category,order_amount,
  rank() over(partition by order_amount) as rows_number from blinkit_orders;
  
@@ -220,4 +221,8 @@ FROM meesho_orders
 WHERE order_status = 'delivered'
 GROUP BY category
 HAVING SUM(price * quantity) > 5000;
+
+-- find customers with sales greater than 3000
+-- find city generating the heighest sales 
+
 

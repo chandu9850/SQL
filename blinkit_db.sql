@@ -207,6 +207,39 @@ SELECT
 FROM blinkit_orders
 ORDER BY order_date, order_id;
 
+-- find dense rank order based order amount
+select order_id,customer_name,order_amount,
+dense_rank() over(order by order_amount desc) as amount_ranks
+from blinkit_orders;
 
- 
- 
+-- LAG notes
+-- lag- gets a value from previous row.
+-- find previous order amount 
+select * from blinkit_orders;
+select order_id,order_date,order_amount,
+lag(order_amount,2) over()
+from blinkit_orders;
+
+
+-- find previous order for each city
+
+
+-- notes
+-- lead- get the value from next row
+-- find diff b/w current and next order_amount
+-- find next order_amount
+select order_id,order_amount,
+lead(order_amount) over(order by order_id) - order_amount as difference
+from blinkit_orders;
+SELECT order_id,order_amount,
+    LEAD(order_amount) OVER () - order_amount AS difference
+FROM blinkit_orders;
+
+-- 1st value return the 1st value in the window or category.
+
+-- find highest order amount in each city using 1st values
+select order_id,customer_name,city,order_amount,
+first_value(order_amount) over(partition by city order by order_amount desc) as highest_order_window
+from blinkit_orders;
+
+
