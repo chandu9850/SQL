@@ -236,6 +236,15 @@ SELECT order_id,order_amount,
 FROM blinkit_orders;
 
 -- 1st value return the 1st value in the window or category.
+SELECT
+    category,
+    product_name,
+    order_amount,
+    FIRST_VALUE(product_name) OVER (
+        PARTITION BY category
+        ORDER BY order_amount DESC
+    ) AS first_product
+FROM blinkit_orders;
 
 -- find highest order amount in each city using 1st values
 select order_id,customer_name,city,order_amount,
