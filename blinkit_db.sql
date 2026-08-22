@@ -252,3 +252,10 @@ first_value(order_amount) over(partition by city order by order_amount desc) as 
 from blinkit_orders;
 
 
+
+
+
+
+
+
+

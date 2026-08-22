@@ -136,3 +136,8 @@ join employees e on e.emp_id=ep.emp_id
 join departments d on d.dept_id=e.dept_id
 where e.gender='f' and e.city='pune' and salary=80000;
 
+
+
+
+
+
