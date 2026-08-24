@@ -39,5 +39,13 @@ select * from new_playlist where duration between'00:03:00' and '00:04:00';
 
 -- order by
 select * from new_playlist order by songid asc limit 5 offset 1;
+select (10+20) from dual;
+
+
+
+
+
+
+
 
 
