@@ -197,7 +197,3 @@ end $$
 delimiter ;
 
 call get_city("mumbai");  
-
-
-
-

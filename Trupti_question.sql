@@ -37,3 +37,19 @@ WHERE salary IN (
     GROUP BY salary
     HAVING COUNT(*) > 1
 );
+
+-- 2.Write a query to identify clients whose total open exposure across all trades exceeds their 
+-- assigned credit_limit, given Clients(client_id, credit_limit) 
+-- and Trades (trade_id, client_id, status, exposure).
+
+create table clients( client_id int , credit_limit int);
+create table trades( trade_id int,client_id int,status_ varchar(50),exposure varchar(50));
+
+select c.client_id,t.trade_id,c.credit_limit,t.status_,sum(t.exposure) as total_exposure
+from clients c  join trades t on c.client_id = t.client_id 
+where t.status_="open"
+group by c.client_id,
+c.credit_limit
+having sum(t.exposure)>c.credit_limit;
+
+
