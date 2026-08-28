@@ -110,3 +110,71 @@ select * from delete_rides;
 
 delete from rapido_rides
 where ride_id=15;
+
+
+-- before insert
+
+delimiter //
+create trigger before_ride_insert
+before insert
+on rapido_rides
+for each row
+begin
+if new.fare<0 then
+signal sqlstate "20000"
+set message_text ="price cant be negative";
+end if ;
+end //
+delimiter ;
+
+insert into rapido_rides VALUES
+(17, 'chandu', 'shubham', 'Pune', 'Mumbai',
+ 'bike', 8.7, -190, 'UPI', 'Completed', '2026-08-15');
+ 
+ 
+ delimiter //
+create trigger before_ride_update
+before update
+on rapido_rides
+for each row
+begin
+if new.fare<0 then
+signal sqlstate "20000"
+set message_text ="price cant be negative";
+end if ;
+end //
+delimiter ;
+
+update  rapido_rides set fare=-70 where ride_id=7 ;
+
+-- create view 
+
+select customer_name, driver_name,fare
+from rapido_rides
+where ride_status="completed";
+
+create view completed_rides as 
+select customer_name,driver_name,fare
+from rapido_rides
+where ride_status="completed";
+
+select customer_name,driver_name,fare
+from completed_rides
+where fare>250;
+
+create view ride_commission as 
+select ride_id,customer_name,driver_name,fare,
+fare*0.10 as commission,
+fare-fare*0.10  as driver_commission
+from rapido_rides;
+
+select * from ride_commission;
+
+-- how to see views
+show full tables
+where table_type="VIEW";
+
+-- drop views
+drop view ride_commissions;
+
+
