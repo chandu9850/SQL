@@ -346,3 +346,167 @@ CASE
 END as table_type
 from properties;
 
+-- 24. Count Properties by Price Category
+SELECT
+    CASE
+        WHEN listing_price >= 20000000 THEN 'Luxury'
+        WHEN listing_price >= 10000000 THEN 'Premium'
+        ELSE 'Affordable'
+    END AS price_category,
+    COUNT(*) AS total_properties
+FROM properties
+GROUP BY price_category;
+
+-- 25. INNER JOIN — Property + Agent
+select * from properties p inner join agents a 
+on p.agent_id=a.agent_id;
+
+-- 26. Property + Agent + Transaction
+select * from agents a  inner join  properties p
+on a.agent_id=p.agent_id
+inner join transactions t
+on  p.property_id=t.property_id;
+
+-- 27. Property + Customer + Agent
+select * from agents a  join  properties p
+on a.agent_id=p.agent_id
+ join customers c
+on p.property_id=c.customer_id;
+
+-- 28. LEFT JOIN — Find Unsold Properties
+select transaction_type from properties p  left join  transactions t
+on  p.property_id=t.property_id
+where transaction_type="rent";
+
+-- 29. Agent-wise Property Count
+SELECT agent_id,
+       COUNT(*) AS property_count
+FROM properties
+GROUP BY agent_id;
+
+-- 30. Top Performing Agents by Sales Revenue
+SELECT a.agent_id,
+       a.agent_name,
+       SUM(t.sale_price) AS total_sales_revenue
+FROM agents a
+JOIN properties p
+    ON a.agent_id = p.agent_id
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale'
+GROUP BY a.agent_id, a.agent_name
+ORDER BY total_sales_revenue DESC;
+
+-- 31. Top Agent  Revenue
+SELECT a.agent_id,
+       a.agent_name,
+       SUM(t.sale_price) AS total_sales_revenue
+FROM agents a
+JOIN properties p
+    ON a.agent_id = p.agent_id
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale'
+GROUP BY a.agent_id, a.agent_name
+ORDER BY total_sales_revenue DESC
+limit 1;
+
+-- 32. Revenue by City
+SELECT 
+  p.city,
+       SUM(t.sale_price) AS total_sales_revenue
+FROM agents a
+JOIN properties p
+    ON a.agent_id = p.agent_id
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale'
+GROUP BY p.city
+ORDER BY total_sales_revenue DESC;
+
+-- 33. Revenue by Property Type
+SELECT 
+  p.property_type,
+       SUM(t.sale_price) AS total_sales_revenue
+FROM agents a
+JOIN properties p
+    ON a.agent_id = p.agent_id
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale'
+GROUP BY p.property_type
+ORDER BY total_sales_revenue DESC;
+
+-- 34. Number of Sales by Property Type
+SELECT p.property_type,
+       COUNT(*) AS number_of_sales
+FROM properties p
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale'
+GROUP BY p.property_type;
+
+-- 35. Average Selling Price
+SELECT round(AVG(p.listing_price),2) AS average_selling_price
+FROM properties p
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale';
+
+-- 36. Average Rent
+SELECT AVG(t.sale_price) AS average_rent
+FROM transactions t
+WHERE t.transaction_type = 'rent';
+
+-- 37. Highest Selling Property
+SELECT p.property_id,
+       t.sale_price 
+FROM properties p
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale'
+ORDER BY t.sale_price DESC
+LIMIT 1;
+
+-- 38. Average Bedrooms Sold
+SELECT AVG(p.bedrooms) AS average_bedrooms_sold
+FROM properties p
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale';
+
+-- 39. Monthly Sales Trend
+SELECT DATE_FORMAT(t.transaction_date, '%Y-%m') AS month,
+       SUM(t.sale_price) AS total_sales
+FROM transactions t
+WHERE t.transaction_type = 'sale'
+GROUP BY DATE_FORMAT(t.transaction_date, '%Y-%m')
+ORDER BY month;
+
+-- 40. Property Listing Trend
+SELECT DATE_FORMAT(listing_date, '%Y-%m') AS month,
+       COUNT(*) AS total_listings
+FROM properties
+GROUP BY DATE_FORMAT(listing_date, '%Y-%m')
+ORDER BY month;
+
+-- 41. Property Demand by City
+SELECT p.city,
+       COUNT(*) AS property_demand
+FROM properties p
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale'
+GROUP BY p.city
+ORDER BY property_demand DESC;
+
+-- 42. Highest Demand City
+SELECT p.city,
+       COUNT(*) AS property_demand
+FROM properties p
+JOIN transactions t
+    ON p.property_id = t.property_id
+WHERE t.transaction_type = 'sale'
+GROUP BY p.city
+ORDER BY property_demand DESC
+LIMIT 2;

@@ -153,14 +153,17 @@ select customer_name, driver_name,fare
 from rapido_rides
 where ride_status="completed";
 
-create view completed_rides as 
-select customer_name,driver_name,fare
+create view completed_ridessss as 
+select customer_name,driver_name,fare,ride_status
 from rapido_rides
 where ride_status="completed";
 
-select customer_name,driver_name,fare
-from completed_rides
-where fare>250;
+select customer_name,driver_name,fare,ride_status
+from completed_ridesss
+where fare>250 and
+ride_status="completed";
+
+drop view completed_ridessss;
 
 create view ride_commission as 
 select ride_id,customer_name,driver_name,fare,
@@ -176,5 +179,11 @@ where table_type="VIEW";
 
 -- drop views
 drop view ride_commissions;
+
+
+
+
+
+
 
 
