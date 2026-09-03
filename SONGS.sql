@@ -36,3 +36,10 @@ select * from playlist;
 
 -- find total duration of all songs playlist
 select sec_to_time(sum(duration))  from playlist;
+
+
+
+
+
+
+
