@@ -510,3 +510,16 @@ WHERE t.transaction_type = 'sale'
 GROUP BY p.city
 ORDER BY property_demand DESC
 LIMIT 2;
+
+
+
+
+
+
+
+
+
+
+
+
+

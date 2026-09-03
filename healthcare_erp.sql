@@ -233,6 +233,21 @@ as patient
 from patients;
 
 
+-- give a seprate row no to patient wihin each doctor order by bill amount
+select patient_id,patient_name,bill_amount,doctor_id,
+row_number() 
+over(partition by doctor_id 
+order by bill_amount ) 
+as patient
+from patients;
+
+-- give a seprate row no to patient wihin each doctor order by bill amount
+select patient_id,patient_name,bill_amount,doctor_id,
+row_number() 
+over(partition by doctor_id 
+order by bill_amount ) 
+as patient
+from patients;
 
 
 
