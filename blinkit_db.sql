@@ -257,7 +257,20 @@ over (partition by category)
 from pizza_orders;
 
 
+-- find highest order amount in each city using 1st values
+select order_id,customer_name,city,order_amount,
+first_value(order_amount) over(partition by city order by order_amount desc) as highest_order_window
+from blinkit_orders;
 
+-- find highest order amount in each city using 1st values
+select order_id,customer_name,city,order_amount,
+first_value(order_amount) over(partition by city order by order_amount desc) as highest_order_window
+from blinkit_orders;
+
+-- find highest order amount in each city using 1st values
+select order_id,customer_name,city,order_amount,
+first_value(order_amount) over(partition by city order by order_amount desc) as highest_order_window
+from blinkit_orders;
 
 
 
