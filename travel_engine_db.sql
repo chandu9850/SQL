@@ -196,4 +196,4 @@ where city=get_city;
 end $$
 delimiter ;
 
-call get_city("mumbai");  
+call get_city("pune");  
