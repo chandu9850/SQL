@@ -5,6 +5,7 @@ CREATE DATABASE banking_analytics_db;
 
 USE banking_analytics_db;
 
+
 -- Step 2 — Create Customers Table
 
 CREATE TABLE customers (
@@ -88,7 +89,7 @@ INSERT INTO customers VALUES
 -- Check:
 
 SELECT *
-FROM customers;
+FROM branches;
 
 -- Step 8 — Insert 10 Branches
 
@@ -123,7 +124,7 @@ INSERT INTO accounts VALUES
 -- Check:
 
 SELECT *
-FROM accounts;
+FROM loans;
 
 -- Step 10 — Insert 15 Transactions
 
